@@ -3,6 +3,9 @@
 
 class BinarySearchAlgo:
 
+    def __init__(self, ls):
+        self.ls = ls
+
 
     #This method will ask the user for the element that the algorithm will look for and saved it to a variable and then return that element at the end.
     def precious_element(self):
@@ -12,6 +15,11 @@ class BinarySearchAlgo:
         precious_int_elmt = int(ask_user_elmt)
 
         return precious_int_elmt
+
+
+    def midpoint(self):
+        pass
+
 
 
 # #test the precious_element() method
