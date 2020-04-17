@@ -15,9 +15,8 @@ class BinarySearchAlgo:
         #
         # precious_int_elmt = int(ask_user_elmt)
 
-        precious_int_elmt = 6   #This is a temporary variable used when creating the program to test the methods. We finished creating the program, Uncomment the above to lines and delete this variable.
 
-        return precious_int_elmt
+        return 1
 
     #Finds the midpoint of the given list.
     def midpoint(self, ls):
@@ -60,7 +59,7 @@ class BinarySearchAlgo:
             if (self.precious_element() > og_ls_midpoint):
 
                 # Find the index of the midpoint
-                midpoint_idx = og_list.index(og_ls_midpoint)
+                midpoint_idx = self.ls.index(og_ls_midpoint)
 
                 # update the index number of the current midpoint
                 self.idx_og_element.append(midpoint_idx)
@@ -71,41 +70,39 @@ class BinarySearchAlgo:
                 #The algorithm is going to divide the list and create a new one so we add one to the counter
                 counter += 1
 
-                # Creates a local list with the rest of the list after we first divide the original list.  And then assign the value of the new local variable to the self.ls. That way we can reuse this if loops and keep dividing the list until we find the element.
+                # Creates a local list with the rest of the list after we first divide the original list.  And then assign the value of the new local variable to the og_ls. That way we can reuse this if loops and keep dividing the list until we find the element.
                 local_ls = og_list[midpoint_plus_one:]
 
+                og_ls = local_ls
 
-                self.ls = local_ls
 
-
-                #return self.ls    #returns [5, 6, 7]
-            elif (self.precious_element() < og_ls_midpoint):
+            if (self.precious_element() < og_ls_midpoint):
 
                 # Find the index of the midpoint
-                midpoint_idx = og_list.index(og_ls_midpoint)
+                midpoint_idx = self.ls.index(og_ls_midpoint)
+                #return midpoint_idx
 
-                # # update the index number of the current midpoint
-                # self.idx_og_element.append(midpoint_idx)
+                # update the index number of the current midpoint
+                self.idx_og_element.append(midpoint_idx)
 
                 # The algorithm is going to divide the list and create a new one so we add one to the counter
                 counter += 1
 
-                # Creates a local list with the rest of the list after we first divide the original list. And then assign the value of the new local variable to the self.ls. That way we can reuse this if loops and keep dividing the list until we find the element.
+                # Creates a local list with the rest of the list after we first divide the original list. And then assign the value of the new local variable to the og_ls. That way we can reuse this if loops and keep dividing the list until we find the element.
                 local_ls = og_list[: midpoint_idx]
+
                 # Dont need midpoint_idx + 1 for this one.
-                self.ls = local_ls
+                og_ls = local_ls
 
 
             #find the midpoint of the new list
-            og_ls_midpoint = self.midpoint(self.ls)
-            #return og_ls_midpoint
-            #print iteration numbers
-            print("Iterations: " + str(counter))
+            og_ls_midpoint = self.midpoint(og_ls)
 
 
         # if loops will check if the midpoint is the element else keep dividing and looking for the element
         if (og_ls_midpoint == self.precious_element()):
 
+            print("Iterations: " + str(counter))
             print(self.idx_og_element)
             return "Found the element Yay!"
 
