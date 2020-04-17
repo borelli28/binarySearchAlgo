@@ -35,6 +35,9 @@ class BinarySearchAlgo:
 
     def bi_search(self):
 
+        # Variable that gets updated every time the list get divided
+        counter = 0
+
         #index in the og_list of the element(og_element) we are looking for
         self.idx_og_element = 0
 
@@ -50,18 +53,29 @@ class BinarySearchAlgo:
         # if loops will check if the midpoint is the element else keep dividing and looking for the element
         if (og_ls_midpoint == og_element):
 
-            return "Found the element Yay!"
+            return "The midpoint of the og list is the element yay!"
+
 
         #while current element is not the element we looking for(og element) enter this loop.
         while(og_ls_midpoint != og_element):
 
-            if (og_element > og_ls_midpoint):
+
+            # if loops will check if the midpoint is the element else keep dividing and looking for the element
+            if (og_ls_midpoint == og_element):
+
+                return "Found the element Yay!"
+
+
+            elif (og_element > og_ls_midpoint):
 
                 # Find the index of the midpoint
                 midpoint_idx = og_list.index(og_ls_midpoint)
 
                 # give the index of the next number after the midpoint. By adding one to the midpoint index.
                 midpoint_plus_one = midpoint_idx + 1
+
+                #The algorithm is going to divide the list and create a new one so we add one to the counter
+                counter += 1
 
                 # Creates a local list with the rest of the list after we first divide the original list.  And then assign the value of the new local variable to the self.ls. That way we can reuse this if loops and keep dividing the list until we find the element.
                 local_ls = og_list[midpoint_plus_one:]
@@ -74,10 +88,14 @@ class BinarySearchAlgo:
                 # Find the index of the midpoint
                 midpoint_idx = og_list.index(og_ls_midpoint)
 
+                # The algorithm is going to divide the list and create a new one so we add one to the counter
+                counter += 1
+
                 # Creates a local list with the rest of the list after we first divide the original list. And then assign the value of the new local variable to the self.ls. That way we can reuse this if loops and keep dividing the list until we find the element.
                 local_ls = og_list[: midpoint_idx]
                 # Dont need midpoint_idx + 1 for this one.
                 self.ls = local_ls
+
 
 
 
