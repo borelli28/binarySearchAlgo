@@ -15,7 +15,7 @@ class BinarySearchAlgo:
         #
         # precious_int_elmt = int(ask_user_elmt)
 
-        precious_int_elmt = 4   #This is a temporary variable used when creating the program to test the methods. We finished creating the program, Uncomment the above to lines and delete this variable.
+        precious_int_elmt = 6   #This is a temporary variable used when creating the program to test the methods. We finished creating the program, Uncomment the above to lines and delete this variable.
 
         return precious_int_elmt
 
@@ -30,7 +30,13 @@ class BinarySearchAlgo:
         #when ls_midpoint divide odd numbers it will give a float number. So this var will use round() to round it to a whole number
         midpoint_rounded = round(ls_midpoint)
 
-        return int(midpoint_rounded)
+        #needs to subtract 1 so we can get the index real index number
+        midpoint_idx = midpoint_rounded - 1
+
+        #Convert the index number into the value of the midpoint in the list
+        the_ls_midpoint_value = ls[midpoint_idx]
+
+        return the_ls_midpoint_value
 
 
     def bi_search(self):
@@ -39,10 +45,7 @@ class BinarySearchAlgo:
         counter = 0
 
         #index in the og_list of the element(og_element) we are looking for
-        self.idx_og_element = 0
-
-        #this variable holds the element we looking for in the list
-        og_element = self.precious_element()
+        self.idx_og_element = []
 
         #this variable holds the original list given in init
         og_list = self.ls
@@ -50,26 +53,17 @@ class BinarySearchAlgo:
         #find the midpoint of the original list
         og_ls_midpoint = self.midpoint(og_list)
 
-        # if loops will check if the midpoint is the element else keep dividing and looking for the element
-        if (og_ls_midpoint == og_element):
-
-            return "The midpoint of the og list is the element yay!"
-
-
         #while current element is not the element we looking for(og element) enter this loop.
-        while(og_ls_midpoint != og_element):
+        while(og_ls_midpoint != self.precious_element()):
 
 
-            # if loops will check if the midpoint is the element else keep dividing and looking for the element
-            if (og_ls_midpoint == og_element):
-
-                return "Found the element Yay!"
-
-
-            elif (og_element > og_ls_midpoint):
+            if (self.precious_element() > og_ls_midpoint):
 
                 # Find the index of the midpoint
                 midpoint_idx = og_list.index(og_ls_midpoint)
+
+                # update the index number of the current midpoint
+                self.idx_og_element.append(midpoint_idx)
 
                 # give the index of the next number after the midpoint. By adding one to the midpoint index.
                 midpoint_plus_one = midpoint_idx + 1
@@ -80,13 +74,18 @@ class BinarySearchAlgo:
                 # Creates a local list with the rest of the list after we first divide the original list.  And then assign the value of the new local variable to the self.ls. That way we can reuse this if loops and keep dividing the list until we find the element.
                 local_ls = og_list[midpoint_plus_one:]
 
+
                 self.ls = local_ls
 
 
-            elif (og_element < og_ls_midpoint):
+                #return self.ls    #returns [5, 6, 7]
+            elif (self.precious_element() < og_ls_midpoint):
 
                 # Find the index of the midpoint
                 midpoint_idx = og_list.index(og_ls_midpoint)
+
+                # # update the index number of the current midpoint
+                # self.idx_og_element.append(midpoint_idx)
 
                 # The algorithm is going to divide the list and create a new one so we add one to the counter
                 counter += 1
@@ -95,6 +94,22 @@ class BinarySearchAlgo:
                 local_ls = og_list[: midpoint_idx]
                 # Dont need midpoint_idx + 1 for this one.
                 self.ls = local_ls
+
+
+            #find the midpoint of the new list
+            og_ls_midpoint = self.midpoint(self.ls)
+            #return og_ls_midpoint
+            #print iteration numbers
+            print("Iterations: " + str(counter))
+
+
+        # if loops will check if the midpoint is the element else keep dividing and looking for the element
+        if (og_ls_midpoint == self.precious_element()):
+
+            print(self.idx_og_element)
+            return "Found the element Yay!"
+
+
 
 
 
