@@ -4,7 +4,7 @@ from math import floor
 class BinarySearchAlgo:
 
     def __init__(self):
-        self.counter = 0    #Used to counter how many times the algorithm goes trough the while loop to find the term
+        self.counter = 0    #Used to count how many times the algorithm goes trough the while loop to find the term
 
     #Method take a list and the term we going to search as parameters
     def bi_search(self, ls, target):
